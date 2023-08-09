@@ -38,6 +38,7 @@ struct AppView: View {
         } //: TAB
         .edgesIgnoringSafeArea(.top)
         .tint(.primary)
+        .background(.white)
     }
 }
 

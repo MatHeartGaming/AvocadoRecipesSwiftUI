@@ -11,6 +11,8 @@ struct RecipesView: View {
     
     //MARK: - PROPERTIES
     private var headers : [Header] = headersData
+    private var facts : [Fact] = factData
+    private var recipes : [Recipe] = recipeData
     
     //MARK: - BODY
     var body: some View {
@@ -25,18 +27,54 @@ struct RecipesView: View {
                 }
             }
             
+            //MARK: - DISHES
+            Text("Avocado Dishes")
+                .bold()
+                .modifier(TitleModifier())
+            DishesView()
+                .frame(maxWidth: 640)
+            
+            
+            //MARK: - AVOCADO FACTS
+            Text("Avocado Facts")
+                .bold()
+                .modifier(TitleModifier())
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 16) {
+                    ForEach(facts) { fact in
+                        FactsView(fact: fact)
+                            .padding(.trailing, 40)
+                    } //: LOOP
+                } //: HSTACK
+                .padding(.vertical)
+                .padding(.leading, 60)
+                .padding(.trailing, 20)
+            } //: SCROLL
+            
+            //MARK: - RECIPE CARDS
+            Text("Avocado Recipes")
+                .fontWeight(.bold)
+                .modifier(TitleModifier())
+            VStack(alignment: .center, spacing: 20) {
+                ForEach(recipes) { recipe in
+                    RecipeCardView(recipe: recipe)
+                }
+            }
+            .frame(maxWidth: 640)
+            .padding(.horizontal)
+            
             //MARK: - FOOTER
             VStack(alignment: .center, spacing: 20) {
                 Text("All About Avocados")
-                    .font(.system(.title,design: .serif))
-                    .bold()
-                    .foregroundColor(Color("ColorGreenAdaptive"))
-                    .padding(8)
+                    .fontWeight(.bold)
+                    .modifier(TitleModifier())
                 
                 Text("Everything you wanted to know about avocados but were too afraid to ask.")
                     .font(.system(.body, design: .serif))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.gray)
+                    .frame(minHeight: 60)
             } //: VSTACK
             .frame(maxWidth: 640)
             .padding()
